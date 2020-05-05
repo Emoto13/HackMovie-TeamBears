@@ -1,6 +1,9 @@
-from event_handler import handle_command
+from event_handler import handle_wrapper
+from constants.commands_requiring_log_in import commands_requiring_log_in
 from commands.show_movies_command import show_movies_command
 from commands.show_movie_projections_by_id_and_date_command import show_movie_projections_by_id_and_date
+from commands.make_reservation_command import make_reservation
+from functools import partial
 
 
 class ClientCommandFactory:
@@ -12,10 +15,30 @@ class ClientCommandFactory:
         commands = {
             'show_movies': show_movies_command,
             'show_movie_projections': show_movie_projections_by_id_and_date,
-            'make_reservation': '',
+            'make_reservation': partial(make_reservation, self.name, self.is_logged_in),
+            'show_reservations': '',
             'cancel_reservation': '',
+            'log_in': '',
+            'sign_up': '',
             'exit': '',
             'help': ''
         }
 
-        return handle_command(command_with_arguments, commands)
+        return self.handle_command(command_with_arguments, commands)
+
+    # TODO add verification decorator and login decorator
+    def handle_command(self, command_with_arguments, commands):
+        command_with_arguments = command_with_arguments.split(" ")
+        command = command_with_arguments.pop(0)
+        arguments = command_with_arguments
+
+        # TODO Refactor to function or decorator
+        if command not in commands.keys():
+            raise ValueError("No such command! Try again.")
+
+        # TODO Refactor to function or decorator
+        if command in commands_requiring_log_in and not self.is_logged_in:
+            raise ValueError("Please log in to use this command.")
+
+        command_to_execute = commands[command]
+        return handle_wrapper(command_to_execute, arguments)
