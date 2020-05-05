@@ -1,6 +1,6 @@
 import sqlite3
 from constants.queries_initial_database import QUERY_MOVIE_INIT, QUERY_PROJECTIONS_INIT, QUERY_USERS_INIT, \
-    QUERY_RESERVATIONS_INIT, QUERY_MOVIE_FILL
+    QUERY_RESERVATIONS_INIT, QUERY_PROJECTIONS_FILL
 
 
 def main():
@@ -9,7 +9,7 @@ def main():
         QUERY_PROJECTIONS_INIT,
         QUERY_USERS_INIT,
         QUERY_RESERVATIONS_INIT,
-        QUERY_MOVIE_FILL
+        QUERY_PROJECTIONS_FILL
     ]
 
     connection = sqlite3.connect('database.db')
