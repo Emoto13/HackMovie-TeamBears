@@ -1,7 +1,7 @@
 from constants.queries_show_movie_by_id_and_date import QUERY_SHOW_MOVIE_BY_ID, QUERY_SHOW_MOVIE_BY_ID_AND_DATE
 from gateway.gateway_show_movie_projections_by_id_and_date import gateway_show_movies_by_id_and_date
-from templates.templates_show_movie_projections_by_id_and_date import print_movie_projections_for_specific_date, \
-    print_movie_projections
+from templates.templates_show_movie_projections_by_id_and_date import display_movie_projections_for_specific_date, \
+    display_movie_projections
 
 
 def show_movie_projections_by_id_and_date(movie_id, date=None):
@@ -19,5 +19,5 @@ def gateway_wrapper(movie_id, date):
 
 def show_projections_wrapper(projections, date):
     if date is None:
-        return print_movie_projections(projections)
-    return print_movie_projections_for_specific_date(projections, date)
+        return display_movie_projections(projections)
+    return display_movie_projections_for_specific_date(projections, date)
