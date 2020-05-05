@@ -1,0 +1,1 @@
+SHOW_MOVIES_QUERY = 'SELECT * FROM Movies ORDER BY rating'
