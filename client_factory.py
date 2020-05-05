@@ -3,22 +3,23 @@ from constants.commands_requiring_log_in import commands_requiring_log_in
 from commands.show_movies_command import show_movies_command
 from commands.show_movie_projections_by_id_and_date_command import show_movie_projections_by_id_and_date
 from commands.make_reservation_command import make_reservation
+from commands.log_in_command import log_in
 from functools import partial
 
 
 class ClientCommandFactory:
-    def __init__(self, name='Guest', is_logged_in=False):
-        self.name = name
+    def __init__(self, user_name='Guest', is_logged_in=False):
+        self.user_name = user_name
         self.is_logged_in = is_logged_in
 
     def execute_command(self, command_with_arguments):
         commands = {
             'show_movies': show_movies_command,
             'show_movie_projections': show_movie_projections_by_id_and_date,
-            'make_reservation': partial(make_reservation, self.name, self.is_logged_in),
+            'make_reservation': partial(make_reservation, self.user_name, self.is_logged_in),
             'show_reservations': '',
             'cancel_reservation': '',
-            'log_in': '',
+            'log_in': partial(log_in, self),
             'sign_up': '',
             'exit': '',
             'help': ''
