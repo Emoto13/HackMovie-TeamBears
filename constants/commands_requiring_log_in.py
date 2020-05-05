@@ -1,0 +1,1 @@
+commands_requiring_log_in = ('make_reservation', 'show_reservations', 'cancel_reservation')
