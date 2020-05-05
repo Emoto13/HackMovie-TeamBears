@@ -1,15 +1,15 @@
 import sqlite3
-from constants.queries_initial_database import movie_query_init, projections_query_init, users_query_init, \
-    reservations_query_init, movie_query_fill
+from constants.queries_initial_database import QUERY_MOVIE_INIT, QUERY_PROJECTIONS_INIT, QUERY_USERS_INIT, \
+    QUERY_RESERVATIONS_INIT, QUERY_MOVIE_FILL
 
 
 def main():
     queries = [
-        movie_query_init,
-        projections_query_init,
-        users_query_init,
-        reservations_query_init,
-        movie_query_fill
+        QUERY_MOVIE_INIT,
+        QUERY_PROJECTIONS_INIT,
+        QUERY_USERS_INIT,
+        QUERY_RESERVATIONS_INIT,
+        QUERY_MOVIE_FILL
     ]
 
     connection = sqlite3.connect('database.db')
