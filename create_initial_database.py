@@ -1,6 +1,5 @@
 import sqlite3
-from queries_initial_database import movie_query_init, movie_query_fill, projections_query_init, \
-    projections_query_fill, users_query_init, users_query_fill, reservations_query_init, reservations_query_fill
+from queries_initial_database import movie_query_init, projections_query_init, users_query_init, reservations_query_init
 
 
 def main():

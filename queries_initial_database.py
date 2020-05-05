@@ -1,9 +1,9 @@
 movie_query_init = '''CREATE TABLE IF NOT EXISTS Movies
     (id integer primary key AUTOINCREMENT unique not NULL,
     name varchar(100) not NULL,
-    raiting real not NULL);'''
+    rating real not NULL);'''
 
-movie_query_fill = '''INSERT INTO Movies (name, raiting)
+movie_query_fill = '''INSERT INTO Movies (name, rating)
                         VALUES
                         ("The Hunger Games: Catching Fire", 7.9),
                         ("Wreck-It Ralph", 7.8),
