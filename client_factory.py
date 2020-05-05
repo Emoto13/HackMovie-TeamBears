@@ -1,4 +1,5 @@
 from event_handler import handle_command
+from commands.show_movies_command import show_movies_command
 
 
 class ClientCommandFactory:
@@ -8,7 +9,7 @@ class ClientCommandFactory:
 
     def execute_command(self, command_with_arguments):
         commands = {
-            'show_movies': '',
+            'show_movies': show_movies_command,
             'show_movie_projections': '',
             'make_reservation': '',
             'cancel_reservation': '',
