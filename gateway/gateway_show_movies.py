@@ -1,5 +1,5 @@
 import sqlite3
-from constants.commands_queries import SHOW_MOVIES_QUERY
+from constants.queries_show_movies import SHOW_MOVIES_QUERY
 
 
 def show_movies_sorted():
