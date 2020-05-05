@@ -1,12 +1,14 @@
 from constants.queries_show_movie_by_id_and_date import QUERY_SHOW_MOVIE_BY_ID, QUERY_SHOW_MOVIE_BY_ID_AND_DATE
 from gateway.gateway_show_movie_projections_by_id_and_date import gateway_show_movies_by_id_and_date
+from templates.templates_show_movie_projections_by_id_and_date import print_movie_projections_for_specific_date, \
+    print_movie_projections
 
 
 def show_movie_projections_by_id_and_date(movie_id, date=None):
     projections = gateway_wrapper(movie_id, date)
     if len(projections) == 0:
         raise ValueError('No projections for this movie')
-    show_projections_wrapper(projections)
+    show_projections_wrapper(projections, date)
 
 
 def gateway_wrapper(movie_id, date):
@@ -15,25 +17,7 @@ def gateway_wrapper(movie_id, date):
     return gateway_show_movies_by_id_and_date(QUERY_SHOW_MOVIE_BY_ID_AND_DATE, (movie_id, date))
 
 
-def show_projections_wrapper(projections):
-    first_projection = projections[0]
-
-    if len(first_projection) == 4:
-        print_movie_projections_for_specific_date(projections)
-    print_movie_projections(projections)
-
-
-# move to templates
-def print_movie_projections_for_specific_date(projections):
-    movie_name = projections[0][0]
-    print(f"Projections for movie '{movie_name}': ")
-    for projection in projections:
-        print(f"[{projection[1]}] - {projection[2]} ({projection[3]})")
-
-
-# move to templates
-def print_movie_projections(projections):
-    movie_name = projections[0][0]
-    print(f"Projections for movie '{movie_name}': ")
-    for projection in projections:
-        print(f"[{projection[1]}] - {projection[2]} {projection[3]} ({projection[4]})")
+def show_projections_wrapper(projections, date):
+    if date is None:
+        return print_movie_projections(projections)
+    return print_movie_projections_for_specific_date(projections, date)
