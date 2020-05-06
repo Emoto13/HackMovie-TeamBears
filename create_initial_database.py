@@ -1,5 +1,5 @@
 import sqlite3
-from utils.constants import QUERY_MOVIE_INIT, QUERY_PROJECTIONS_INIT, QUERY_USERS_INIT, \
+from utils.constants.queries_initial_database import QUERY_MOVIE_INIT, QUERY_PROJECTIONS_INIT, QUERY_USERS_INIT, \
     QUERY_RESERVATIONS_INIT, QUERY_USERS_FILL
 
 

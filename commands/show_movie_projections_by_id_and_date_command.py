@@ -1,4 +1,4 @@
-from utils.constants import QUERY_SHOW_MOVIE_BY_ID, QUERY_SHOW_MOVIE_BY_ID_AND_DATE
+from utils.constants.queries_show_movie_by_id_and_date import QUERY_SHOW_MOVIE_BY_ID, QUERY_SHOW_MOVIE_BY_ID_AND_DATE
 from gateway.show_movie_projections_by_id_and_date import show_movies_by_id_and_date
 from templates.movie_projections_by_id_and_date import display_movie_projections_for_specific_date, \
     display_movie_projections
