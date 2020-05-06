@@ -1,0 +1,1 @@
+DELETE_FROM_TABLE = 'DELETE FROM Reservations WHERE id = ?'
