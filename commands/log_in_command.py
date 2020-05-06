@@ -9,7 +9,7 @@ def log_in(factory):
     name, password = get_login_info()
     hashed_password = hash_password(password, name)
     check_log_in_info([name, hashed_password])
-    print('You logged in succesfully!')
+    print('You logged in successfully!')
     factory.user_name = name
     factory.is_logged_in = True
 

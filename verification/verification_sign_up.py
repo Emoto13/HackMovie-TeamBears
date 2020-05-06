@@ -25,12 +25,12 @@ def verify_password_params(password, verification_password):
         print('Passwords do not match')
         return False
     if len(password) < 8:
-        print('Password should be atleast 8 characters')
+        print('Password should be at least 8 characters')
         return False
     if not any(char.isupper() for char in password):
-        print('Password should have atleast 1 uppercase char')
+        print('Password should have at least 1 uppercase char')
         return False
     if not any(char in special_char for char in password):
-        print('Password should have atlest 1 special char')
+        print('Password should have at least 1 special char')
         return False
     return True
