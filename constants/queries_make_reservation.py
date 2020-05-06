@@ -21,3 +21,9 @@ QUERY_GET_TAKEN_SEATS_BY_ROWS_AND_COLUMNS = '''SELECT row, col
                                             WHERE projection_id = ?
                                             ORDER BY row;'''
 
+QUERY_GET_USER_ID_BY_USERNAME = '''SELECT id
+                                    FROM Users 
+                                    WHERE username = ?'''
+
+QUERY_INSERT_INTO_RESERVATIONS = '''INSERT INTO Reservations (user_id, projection_id, row, col)
+                                    VALUES (?, ?, ?, ?)'''

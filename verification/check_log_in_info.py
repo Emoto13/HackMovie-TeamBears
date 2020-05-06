@@ -1,4 +1,4 @@
-from gateway.gateway_check_log_in_info import check_log_in_info_gateway
+from gateway.check_log_in_info import check_log_in_info_gateway
 
 
 def check_log_in_info(login_info):
