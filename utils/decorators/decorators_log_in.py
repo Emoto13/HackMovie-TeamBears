@@ -1,6 +1,6 @@
-def check_if_logged_in(func):
-    def factory_wraper(factory):
+def already_logged_in(func):
+    def factory_wrapper(factory):
         if factory.is_logged_in:
             raise ValueError('You are already logged in?!')
         func(factory)
-    return factory_wraper
+    return factory_wrapper
