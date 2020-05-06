@@ -18,12 +18,23 @@ def display_projections(projections):
 def display_saloon_with_taken_seats(saloon):
     for row in saloon:
         print("".join(row))
-    print(f'{(" " * (len(saloon)))}SCREEN IS HERE{(" " * (len(saloon) // 5))}')
+    print(f'{(" " * (len(saloon)))}SCREEN IS HERE{(" " * (len(saloon)))}')
 
 
 def display_reservation_info(projection_info, seats):
-    print(projection_info)
-    print(seats)
+    name, rating, date, time, type_of_projection = \
+        projection_info[0], projection_info[1], projection_info[2], projection_info[3], projection_info[4]
+
+    seats = [str(seat) for seat in seats]
+
+    print('This is your reservation: ')
+    print(f"Movie: {name} ({rating})")
+    print(f"Date and time: {date} {time} ({type_of_projection})")
+    print(f"Seats: {' '.join(seats)}")
+
+
+def display_successful_reservation():
+    print("Reservation is successful. Thanks.")
 
 
 def display_cancel_reservation():

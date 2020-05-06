@@ -1,5 +1,4 @@
-from event_handler import handle_wrapper
-from constants.commands_requiring_log_in import commands_requiring_log_in
+from constants.commands_requiring_log_in import COMMANDS_REQUIRING_LOG_IN
 from commands.show_movies_command import show_movies_command
 from commands.show_movie_projections_by_id_and_date_command import show_movie_projections_by_id_and_date
 from commands.make_reservation_command import make_reservation
@@ -40,11 +39,11 @@ class ClientCommandFactory:
             raise ValueError("No such command! Try again.")
 
         # TODO Refactor to function or decorator
-        if command in commands_requiring_log_in and not self.is_logged_in:
+        if command in COMMANDS_REQUIRING_LOG_IN and not self.is_logged_in:
             raise ValueError("Please log in to use this command.")
 
         command_to_execute = commands[command]
-        return handle_wrapper(command_to_execute, arguments)
+        return self.handle_wrapper(command_to_execute, arguments)
 
     def handle_wrapper(self, command_to_execute, arguments):
         if len(arguments) > 0:

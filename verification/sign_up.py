@@ -1,5 +1,5 @@
 from gateway.gateway_sign_up import check_user_name
-from templates.templates_sign_up import sign_up_name, sign_up_password
+from templates.sign_up import sign_up_name, sign_up_password
 import string
 
 
