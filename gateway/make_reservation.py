@@ -4,7 +4,7 @@ from constants.queries_make_reservation import QUERY_MOVIES_WITH_AVAILABLE_SEATS
     QUERY_INSERT_INTO_RESERVATIONS
 
 
-def gateway_get_movies_with_available_seats():
+def get_movies_with_available_seats():
     connection = sqlite3.connect('database.db')
     cursor = connection.cursor()
     cursor.execute(QUERY_MOVIES_WITH_AVAILABLE_SEATS)
@@ -14,7 +14,7 @@ def gateway_get_movies_with_available_seats():
     return movies
 
 
-def gateway_get_projections_by_id(movie_id):
+def get_projections_by_id(movie_id):
     connection = sqlite3.connect('database.db')
     cursor = connection.cursor()
     cursor.execute(QUERY_GET_PROJECTIONS_BY_ID, (movie_id,))
@@ -24,7 +24,7 @@ def gateway_get_projections_by_id(movie_id):
     return movies
 
 
-def gateway_get_projection_info(projection_id):
+def get_projection_info(projection_id):
     connection = sqlite3.connect('database.db')
     cursor = connection.cursor()
     cursor.execute(QUERY_GET_PROJECTION_INFO, (projection_id,))
@@ -34,7 +34,7 @@ def gateway_get_projection_info(projection_id):
     return projection_info
 
 
-def gateway_get_taken_seats_rows_and_columns(projection_id):
+def get_taken_seats_rows_and_columns(projection_id):
     connection = sqlite3.connect('database.db')
     cursor = connection.cursor()
     cursor.execute(QUERY_GET_TAKEN_SEATS_BY_ROWS_AND_COLUMNS, (projection_id,))
