@@ -2,15 +2,13 @@ import re
 from functools import partial
 
 from constants.saloon import SALOON
-from gateway.gateway_make_reservation import gateway_get_movies_with_available_seats, gateway_get_projections_by_id, \
-    gateway_get_taken_seats_rows_and_columns, gateway_get_projection_info, create_new_reservation_in_the_database
-
-from templates.templates_make_reservation import *
-from verification.verification_make_reservation import seat_is_valid, action_is_invalid, \
+from verification.make_reservation import seat_is_valid, action_is_invalid, \
     verify_projections_with_empty_seats_exist
 
+from gateway.make_reservation import *
+from templates.make_reservation import *
 
-# TODO finish finish_reservation
+
 def make_reservation(user_name):
     greet_user(user_name)
 
@@ -22,25 +20,27 @@ def make_reservation(user_name):
 
     # Step 3
     saloon_and_projection_info = choose_projection_by_id_and_display_salon()
-    saloon, projection_info = saloon_and_projection_info[0], saloon_and_projection_info[1]
+    saloon, projection_info, projection_id = \
+        saloon_and_projection_info[0], saloon_and_projection_info[1], saloon_and_projection_info[2]
 
     # Step 4
     seats = choose_seats_and_display_reservation(tickets, saloon, projection_info)
 
     # Step 5
-    finish_reservation(user_name, seats)
+    finish_reservation(user_name, projection_id, seats)
 
 
 def choose_tickets_number_and_display_movies():
     tickets = int(input('Step 1 (User): Choose number of tickets> '))  # verify tickets
-    movies = gateway_get_movies_with_available_seats()
+    movies = get_movies_with_available_seats()
     display_movies_with_available_seats(movies)
     return tickets
 
 
 def choose_movie_by_id_and_display_projections():
-    movie_id = int(input('Step 2 (Movie): Choose a movie by id> '))  # verify movie_id
-    projections = gateway_get_projections_by_id(movie_id)
+    movie_id = int(input('Step 2 (Movie): Choose a movie by id> '))
+    # verify movie_id
+    projections = get_projections_by_id(movie_id)
     verify_projections_with_empty_seats_exist(projections)
     display_projections(projections)
     return projections
@@ -50,11 +50,11 @@ def choose_projection_by_id_and_display_salon():
     projection_id = int(input('Step 3 (Projection): Choose a projection by id> '))
     # verify projection_by_id
 
-    taken_seats_rows_and_columns = gateway_get_taken_seats_rows_and_columns(projection_id)
-    projection_info = gateway_get_projection_info(projection_id)
+    taken_seats_rows_and_columns = get_taken_seats_rows_and_columns(projection_id)
+    projection_info = get_projection_info(projection_id)[0]
     saloon = generate_saloon(taken_seats_rows_and_columns)
     display_saloon_with_taken_seats(saloon)
-    return saloon, projection_info
+    return saloon, projection_info, projection_id
 
 
 def generate_saloon(taken_seats_rows_and_columns):
@@ -90,22 +90,24 @@ def get_row_and_col(seat):
     return row, col
 
 
-def finish_reservation(user_name, seats):
+def finish_reservation(user_name, projection_id,  seats):
     action = input("Step 5 (Confirm - type 'finalize' or 'cancel' to cancel the reservation)> ")
-    actions = {'finalize': partial(finalize, user_name, seats),
-               'cancel': ''}
+    actions = {'finalize': partial(finalize, user_name, projection_id, seats),
+               'cancel': cancel}
 
-    return actions[action]
+    return handle_action(action, actions)
 
 
 def handle_action(action, actions):
-    while action_is_invalid(action, actions):
+    while not action_is_invalid(action, actions):
         action = input("Step 5 (Confirm - type 'finalize' or 'cancel' to cancel the reservation)> ")
-    return actions[action]
+    return actions[action]()
 
 
-def finalize(user_name, seats):
-    create_new_reservation_in_the_database(user_name, seats)
+def finalize(user_name, projection_id,  seats):
+    user_id = int(get_user_id_by_name(user_name)[0][0])
+    create_new_reservation_in_the_database(user_id, projection_id, seats)
+    display_successful_reservation()
 
 
 def cancel():
