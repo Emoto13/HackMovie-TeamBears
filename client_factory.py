@@ -4,6 +4,7 @@ from commands.show_movies_command import show_movies_command
 from commands.show_movie_projections_by_id_and_date_command import show_movie_projections_by_id_and_date
 from commands.make_reservation_command import make_reservation
 from commands.log_in_command import log_in
+from commands.sign_up_command import sign_up
 from functools import partial
 
 
@@ -20,7 +21,7 @@ class ClientCommandFactory:
             'show_reservations': '',
             'cancel_reservation': '',
             'log_in': partial(log_in, self),
-            'sign_up': '',
+            'sign_up': sign_up,
             'exit': '',
             'help': ''
         }
