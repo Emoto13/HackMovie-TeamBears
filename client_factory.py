@@ -14,6 +14,7 @@ class ClientCommandFactory:
         self.is_logged_in = is_logged_in
 
     def execute_command(self, command_with_arguments):
+        # partial is used for functions which take global params as args
         commands = {
             'show_movies': show_movies_command,
             'show_movie_projections': show_movie_projections_by_id_and_date,
@@ -44,3 +45,8 @@ class ClientCommandFactory:
 
         command_to_execute = commands[command]
         return handle_wrapper(command_to_execute, arguments)
+
+    def handle_wrapper(self, command_to_execute, arguments):
+        if len(arguments) > 0:
+            return command_to_execute(*arguments)
+        return command_to_execute()
