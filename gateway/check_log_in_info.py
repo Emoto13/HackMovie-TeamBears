@@ -1,5 +1,5 @@
 import sqlite3
-from constants.queries_check_log_in_info import CHECK_LOG_IN_INFO
+from utils.constants.queries_check_log_in_info import CHECK_LOG_IN_INFO
 
 
 def check_log_in_info_gateway(login_info):

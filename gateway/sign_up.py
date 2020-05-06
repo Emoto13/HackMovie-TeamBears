@@ -1,5 +1,5 @@
 import sqlite3
-from constants.queries_sign_up import USER_NAME_UNIQUENESSS, ADD_USER_TO_DATABASE
+from utils.constants.queries_sign_up import USER_NAME_UNIQUENESSS, ADD_USER_TO_DATABASE
 
 
 def check_user_name(user_name):

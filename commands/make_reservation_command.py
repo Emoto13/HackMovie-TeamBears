@@ -1,7 +1,7 @@
 import re
 from functools import partial
 
-from constants.saloon import SALOON
+from utils.constants import SALOON
 from verification.make_reservation import seat_is_valid, action_is_invalid, \
     verify_projections_with_empty_seats_exist
 

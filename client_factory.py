@@ -1,4 +1,4 @@
-from constants.commands_requiring_log_in import COMMANDS_REQUIRING_LOG_IN
+from utils.constants import COMMANDS_REQUIRING_LOG_IN
 from commands.show_movies_command import show_movies_command
 from commands.show_movie_projections_by_id_and_date_command import show_movie_projections_by_id_and_date
 from commands.make_reservation_command import make_reservation

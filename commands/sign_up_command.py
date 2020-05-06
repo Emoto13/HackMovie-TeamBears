@@ -1,6 +1,6 @@
 import hashlib
-from verification.verification_sign_up import verify_user_name_uniqueness, verify_password
-from gateway.gateway_sign_up import add_user_to_database
+from verification.sign_up import verify_user_name_uniqueness, verify_password
+from gateway.sign_up import add_user_to_database
 
 
 def sign_up():
