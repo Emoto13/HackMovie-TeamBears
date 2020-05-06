@@ -4,6 +4,9 @@ from commands.show_movie_projections_by_id_and_date_command import show_movie_pr
 from commands.make_reservation_command import make_reservation
 from commands.log_in_command import log_in
 from commands.sign_up_command import sign_up
+from commands.show_reservations import show_reservations
+from commands.cancel_reservation import cancel_reservation
+from templates.show_help import show_help
 from functools import partial
 
 
@@ -17,13 +20,13 @@ class ClientCommandFactory:
         commands = {
             'show_movies': show_movies_command,
             'show_movie_projections': show_movie_projections_by_id_and_date,
-            'make_reservation': partial(make_reservation, self.user_name, self.is_logged_in),
-            'show_reservations': '',
-            'cancel_reservation': '',
+            'make_reservation': partial(make_reservation, self.user_name),
+            'show_reservations': partial(show_reservations, self.user_name),
+            'cancel_reservation': partial(cancel_reservation, self.user_name),
             'log_in': partial(log_in, self),
             'sign_up': sign_up,
             'exit': '',
-            'help': ''
+            'help': show_help
         }
 
         return self.handle_command(command_with_arguments, commands)
