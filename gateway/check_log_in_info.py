@@ -9,4 +9,8 @@ def check_log_in_info_gateway(login_info):
     result = cursor.fetchall()
     connection.commit()
     connection.close()
+
+    if len(result) == 0:
+        raise ValueError('Wrong user name or password')
+
     return result
