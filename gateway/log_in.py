@@ -1,5 +1,5 @@
 import sqlite3
-from utils.constants.queries_check_log_in_info import CHECK_LOG_IN_INFO
+from utils.constants.queries_log_in import CHECK_LOG_IN_INFO
 from utils.database_communication import DataBaseCommunication
 
 
