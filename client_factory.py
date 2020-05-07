@@ -1,4 +1,3 @@
-from utils.constants.commands_requiring_log_in import COMMANDS_REQUIRING_LOG_IN
 from commands.show_movies_command import show_movies_command
 from commands.show_movie_projections_by_id_and_date_command import show_movie_projections_by_id_and_date
 from commands.make_reservation_command import make_reservation
@@ -8,6 +7,8 @@ from commands.show_reservations import show_reservations
 from commands.cancel_reservation import cancel_reservation
 from commands.help_command import get_help_menu
 from functools import partial
+
+from verification.factory import verify_command
 
 
 class ClientCommandFactory:
@@ -36,18 +37,16 @@ class ClientCommandFactory:
         command = command_with_arguments.pop(0)
         arguments = command_with_arguments
 
-        # TODO Refactor to function or decorator
-        if command not in commands.keys():
-            raise ValueError("No such command! Try again.")
-
-        # TODO Refactor to function or decorator
-        if command in COMMANDS_REQUIRING_LOG_IN and not self.is_logged_in:
-            raise ValueError("Please log in to use this command.")
+        verify_command(command, commands, self.is_logged_in)
 
         command_to_execute = commands[command]
-        return self.handle_wrapper(command_to_execute, arguments)
+        return self.command_executor(command_to_execute, arguments)
 
-    def handle_wrapper(self, command_to_execute, arguments):
+    def command_executor(self, command_to_execute, arguments):
         if len(arguments) > 0:
             return command_to_execute(*arguments)
         return command_to_execute()
+
+    def set_logged_user(self, user_name):
+        self.user_name = user_name
+        self.is_logged_in = True
