@@ -1,5 +1,5 @@
-from utils.constants.help import display_help
+from utils.constants.help import HELP
 
 
-def show_help():
-    print(display_help)
+def display_help():
+    print(HELP)
