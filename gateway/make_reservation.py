@@ -33,7 +33,7 @@ def get_taken_seats_rows_and_columns(projection_id):
 
 def get_user_id_by_name(user_name):
     connection = sqlite3.connect('database.db')
-    user_id = DataBaseCommunication.get_data(connection, QUERY_GET_USER_ID_BY_USERNAME, user_name)
+    user_id = int(DataBaseCommunication.get_data(connection, QUERY_GET_USER_ID_BY_USERNAME, user_name)[0][0])
     return user_id
 
 

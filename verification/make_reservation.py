@@ -1,13 +1,38 @@
 import re
 
 
+# TODO prints to display in templates
+# Step 1
+def is_ticket_number_valid(tickets):
+    if tickets <= 0:
+        print("Invalid number of tickets. Try again.")
+        return False
+    return True
+
+
 # Step 2
+def is_movie_id_valid(movie_id, movie_ids):
+    if movie_id not in movie_ids:
+        print("No movie with this id. Try again.")
+        return False
+    return True
+
+
 def verify_projections_with_empty_seats_exist(projections):
     if len(projections) == 0:
         raise ValueError("Sorry no projections with empty seats found. :'( ")
 
+
+# Step 3
+def is_projection_id_valid(projection_id, projection_ids):
+    if projection_id not in projection_ids:
+        print("No projections for this movie with such id. Try again.")
+        return False
+    return True
+
+
 # Step 4
-def seat_is_valid(seat, saloon):
+def seat_is_valid(seat, saloon, seats):
     regex = '[(]?([\\d]+),[ ]*([\\d]+)[)]?'
     row_and_column = re.search(regex, seat)
     if not verify_seat_input(row_and_column):
@@ -21,12 +46,18 @@ def seat_is_valid(seat, saloon):
 
     if not verify_seat_is_available(row, col, saloon):
         return False
+
+    verifiable_seat = (row, col)
+
+    if verifiable_seat in seats:
+        print("You already choose this seat")
+        return False
     return True
 
 
 def verify_seat_input(row_and_column):
     if row_and_column is None:
-        print('Error wrong input. Correct input is in the form of (number, number)')
+        print("Error wrong input. Correct input is in the form of (number, number)")
         return False
     return True
 
@@ -47,7 +78,7 @@ def verify_seat_is_available(row, col, saloon):
 
 
 # Step 5
-def action_is_invalid(action, actions):
+def is_action_valid(action, actions):
     if action not in actions.keys():
         print("No such action")
         return False

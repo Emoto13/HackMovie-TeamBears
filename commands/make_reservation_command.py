@@ -1,27 +1,25 @@
 import re
 from functools import partial
 
+from templates.input_make_reservation import get_ticket_number, get_movie_id, get_projection_id, get_seat_number, \
+    get_action
 from utils.constants.saloon import SALOON
-from verification.make_reservation import seat_is_valid, action_is_invalid, \
-    verify_projections_with_empty_seats_exist
+from verification.make_reservation import verify_projections_with_empty_seats_exist
 
 from gateway.make_reservation import *
-from templates.make_reservation import *
+from templates.display_make_reservation import *
 
 
 def make_reservation(user_name):
     greet_user(user_name)
 
     # Step 1
-    tickets = choose_tickets_number_and_display_movies()
-
+    tickets, movie_ids = choose_tickets_number_and_display_movies()
     # Step 2
-    choose_movie_by_id_and_display_projections()
+    projection_ids = choose_movie_by_id_and_display_projections(movie_ids)
 
     # Step 3
-    saloon_and_projection_info = choose_projection_by_id_and_display_salon()
-    saloon, projection_info, projection_id = \
-        saloon_and_projection_info[0], saloon_and_projection_info[1], saloon_and_projection_info[2]
+    saloon, projection_info, projection_id = choose_projection_by_id_and_display_salon(projection_ids)
 
     # Step 4
     seats = choose_seats_and_display_reservation(tickets, saloon, projection_info)
@@ -31,25 +29,32 @@ def make_reservation(user_name):
 
 
 def choose_tickets_number_and_display_movies():
-    tickets = int(input('Step 1 (User): Choose number of tickets> '))  # verify tickets
+    tickets = get_ticket_number()
     movies = get_movies_with_available_seats()
     display_movies_with_available_seats(movies)
-    return tickets
+    movie_ids = get_movie_ids(movies)
+    return tickets, movie_ids
 
 
-def choose_movie_by_id_and_display_projections():
-    movie_id = int(input('Step 2 (Movie): Choose a movie by id> '))
-    # verify movie_id
+def get_movie_ids(movies):
+    return list(map(lambda movie: movie[0], movies))
+
+
+def choose_movie_by_id_and_display_projections(movie_ids):
+    movie_id = get_movie_id(movie_ids)
     projections = get_projections_by_id(movie_id)
     verify_projections_with_empty_seats_exist(projections)
     display_projections(projections)
-    return projections
+    projection_ids = get_projection_ids(projections)
+    return projection_ids
 
 
-def choose_projection_by_id_and_display_salon():
-    projection_id = int(input('Step 3 (Projection): Choose a projection by id> '))
-    # verify projection_by_id
+def get_projection_ids(projections):
+    return list(map(lambda projection: projection[0], projections))
 
+
+def choose_projection_by_id_and_display_salon(projection_ids):
+    projection_id = get_projection_id(projection_ids)
     taken_seats_rows_and_columns = get_taken_seats_rows_and_columns(projection_id)
     projection_info = get_projection_info(projection_id)[0]
     saloon = generate_saloon(taken_seats_rows_and_columns)
@@ -68,16 +73,14 @@ def generate_saloon(taken_seats_rows_and_columns):
 
 def choose_seats_and_display_reservation(tickets, saloon, projection_info):
     seats = choose_seats(tickets, saloon)
-    display_reservation_info(projection_info, seats)
+    display_reservation_info(seats, *projection_info)
     return seats
 
 
 def choose_seats(tickets, saloon):
     seats = []
-    for i in range(tickets):
-        seat = input('Step 4 (Seats): Choose seat 1> ')
-        while not seat_is_valid(seat, saloon):
-            seat = input('Step 4 (Seats): Choose seat 1> ')
+    for seat_number in range(1, tickets + 1):
+        seat = get_seat_number(seat_number, saloon, seats)
         seats.append(get_row_and_col(seat))
     return seats
 
@@ -90,22 +93,16 @@ def get_row_and_col(seat):
     return row, col
 
 
-def finish_reservation(user_name, projection_id,  seats):
-    action = input("Step 5 (Confirm - type 'finalize' or 'cancel' to cancel the reservation)> ")
+def finish_reservation(user_name, projection_id, seats):
     actions = {'finalize': partial(finalize, user_name, projection_id, seats),
                'cancel': cancel}
+    action = get_action(actions)
 
-    return handle_action(action, actions)
-
-
-def handle_action(action, actions):
-    while not action_is_invalid(action, actions):
-        action = input("Step 5 (Confirm - type 'finalize' or 'cancel' to cancel the reservation)> ")
     return actions[action]()
 
 
-def finalize(user_name, projection_id,  seats):
-    user_id = int(get_user_id_by_name(user_name)[0][0])
+def finalize(user_name, projection_id, seats):
+    user_id = get_user_id_by_name(user_name)
     create_new_reservation_in_the_database(user_id, projection_id, seats)
     display_successful_reservation()
 

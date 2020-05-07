@@ -21,9 +21,8 @@ def display_saloon_with_taken_seats(saloon):
     print(f'{(" " * (len(saloon)))}SCREEN IS HERE{(" " * (len(saloon)))}')
 
 
-def display_reservation_info(projection_info, seats):
-    name, rating, date, time, type_of_projection = \
-        projection_info[0], projection_info[1], projection_info[2], projection_info[3], projection_info[4]
+def display_reservation_info(seats, *projection_info):
+    name, rating, date, time, type_of_projection = projection_info
 
     seats = [str(seat) for seat in seats]
 
@@ -38,4 +37,4 @@ def display_successful_reservation():
 
 
 def display_cancel_reservation():
-    print("You have cancelled the reservation successfully!")
+    print("You have cancelled the reservation!")
