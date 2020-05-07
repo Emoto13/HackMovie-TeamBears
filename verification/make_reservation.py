@@ -3,6 +3,10 @@ import re
 
 # TODO prints to display in templates
 # Step 1
+from templates.make_reservation_display import display_wrong_movie_id, display_wrong_projection_id, \
+    display_seat_already_reserved, display_wrong_seat_input, display_seat_is_not_in_the_saloon, display_seat_is_taken
+
+
 def is_ticket_number_valid(tickets):
     if tickets <= 0:
         print("Invalid number of tickets. Try again.")
@@ -13,7 +17,7 @@ def is_ticket_number_valid(tickets):
 # Step 2
 def is_movie_id_valid(movie_id, movie_ids):
     if movie_id not in movie_ids:
-        print("No movie with this id. Try again.")
+        display_wrong_movie_id()
         return False
     return True
 
@@ -26,7 +30,7 @@ def verify_projections_with_empty_seats_exist(projections):
 # Step 3
 def is_projection_id_valid(projection_id, projection_ids):
     if projection_id not in projection_ids:
-        print("No projections for this movie with such id. Try again.")
+        display_wrong_projection_id()
         return False
     return True
 
@@ -50,21 +54,21 @@ def seat_is_valid(seat, saloon, seats):
     verifiable_seat = (row, col)
 
     if verifiable_seat in seats:
-        print("You already choose this seat")
+        display_seat_already_reserved()
         return False
     return True
 
 
 def verify_seat_input(row_and_column):
     if row_and_column is None:
-        print("Error wrong input. Correct input is in the form of (number, number)")
+        display_wrong_seat_input()
         return False
     return True
 
 
 def verify_seat_is_in_saloon(row, col, saloon):
     if row < 1 or col < 1 or row >= len(saloon) or col >= len(saloon[0]):
-        print("No such seat in the saloon")
+        display_seat_is_not_in_the_saloon()
         return False
     return True
 
@@ -72,7 +76,7 @@ def verify_seat_is_in_saloon(row, col, saloon):
 def verify_seat_is_available(row, col, saloon):
     seat = saloon[row][col]
     if seat == '  X':
-        print("Seat is taken. Please, choose another one.")
+        display_seat_is_taken()
         return False
     return True
 
@@ -80,6 +84,6 @@ def verify_seat_is_available(row, col, saloon):
 # Step 5
 def is_action_valid(action, actions):
     if action not in actions.keys():
-        print("No such action")
+        display_no_such_action()
         return False
     return True
