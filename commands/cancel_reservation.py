@@ -1,11 +1,14 @@
-from templates.choose_reservation_to_cancel import chosen_reservation
-from verification.check_reservation_exists import check_reservation_exists
-from gateway.remove_reservation import remove_reservation
+from templates.cancel_reservation import get_reservation, display_cancel_reservation
+from gateway.cancel_reservation import remove_reservation, get_all_reservations_by_user_name
 
 
-# TODO improve functionality
-def cancel_reservation(name):
-    reservation_id = chosen_reservation()
-    if not check_reservation_exists(name, reservation_id):
-        raise ValueError("Provided id doesn't match any reservation_id")
+def cancel_reservation(user_name):
+    all_reservations = get_reservations(user_name)
+    reservation_id = get_reservation(all_reservations)
     remove_reservation(reservation_id)
+    display_cancel_reservation()
+
+
+def get_reservations(user_name):
+    all_reservations = get_all_reservations_by_user_name(user_name)
+    return list(map(lambda reservation: reservation[0], all_reservations))
