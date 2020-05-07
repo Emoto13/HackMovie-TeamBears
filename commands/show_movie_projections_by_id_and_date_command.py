@@ -1,5 +1,5 @@
 from gateway.show_movie_projections_by_id_and_date import show_movies_by_id_or_date
-from templates.movie_projections_by_id_and_date import display_projections
+from templates.show_movie_projections_by_id_and_date import display_projections
 from verification.show_movie_projections_by_id_and_date import verify_projections
 
 
