@@ -1,5 +1,5 @@
 import hashlib
-from templates.log_in import get_login_info, display_successful_login
+from views.templates.log_in import get_login_info, display_successful_login
 from gateway.log_in import get_log_in_info
 from utils.decorators.log_in_decorators import already_logged_in
 from verification.log_in import verify_user_exists

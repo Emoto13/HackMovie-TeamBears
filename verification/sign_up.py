@@ -1,5 +1,5 @@
 from gateway.sign_up import check_user_name_already_exists
-from templates.sign_up import sign_up_name, sign_up_password
+from views.templates.sign_up import sign_up_name, sign_up_password
 import string
 
 

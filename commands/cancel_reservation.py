@@ -1,5 +1,5 @@
-from templates.cancel_reservation_display import display_cancel_reservation
-from templates.cancel_reservation_input import get_reservation
+from views.templates.cancel_reservation_display import display_cancel_reservation
+from views.templates.cancel_reservation_input import get_reservation
 from gateway.cancel_reservation import remove_reservation, get_all_reservations_by_user_name
 
 

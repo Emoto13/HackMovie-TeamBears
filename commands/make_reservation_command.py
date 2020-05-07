@@ -1,13 +1,13 @@
 import re
 from functools import partial
 
-from templates.make_reservation_input import get_ticket_number, get_movie_id, get_projection_id, get_seat_number, \
+from views.templates.make_reservation_input import get_ticket_number, get_movie_id, get_projection_id, get_seat_number, \
     get_action
 from utils.constants.saloon import SALOON
 from verification.make_reservation import verify_projections_with_empty_seats_exist
 
 from gateway.make_reservation import *
-from templates.make_reservation_display import *
+from views.templates.make_reservation_display import *
 
 
 def make_reservation(user_name):

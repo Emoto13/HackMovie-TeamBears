@@ -1,5 +1,5 @@
 from gateway.show_movies import show_movies_sorted
-from templates.show_movies import display_movies
+from views.templates.show_movies import display_movies
 
 
 def show_movies_command():
