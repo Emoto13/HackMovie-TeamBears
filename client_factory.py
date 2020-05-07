@@ -6,7 +6,7 @@ from commands.log_in_command import log_in
 from commands.sign_up_command import sign_up
 from commands.show_reservations import show_reservations
 from commands.cancel_reservation import cancel_reservation
-from templates.show_help import show_help
+from commands.help_command import get_help_menu
 from functools import partial
 
 
@@ -26,12 +26,11 @@ class ClientCommandFactory:
             'log_in': partial(log_in, self),
             'sign_up': sign_up,
             'exit': '',
-            'help': show_help
+            'help': get_help_menu
         }
 
         return self.handle_command(command_with_arguments, commands)
 
-    # TODO add verification decorator and login decorator
     def handle_command(self, command_with_arguments, commands):
         command_with_arguments = command_with_arguments.split(" ")
         command = command_with_arguments.pop(0)

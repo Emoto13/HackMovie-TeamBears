@@ -1,4 +1,4 @@
-from gateway.sign_up import check_user_name
+from gateway.sign_up import check_user_name_already_exists
 from templates.sign_up import sign_up_name, sign_up_password
 import string
 
@@ -6,8 +6,8 @@ import string
 def verify_user_name_uniqueness():
     while True:
         user_name = sign_up_name()
-        res = check_user_name([user_name])
-        if len(res) == 0:
+        names = check_user_name_already_exists(user_name)
+        if len(names) == 0:
             return user_name
         print('User_name is taken!')
 
