@@ -3,7 +3,7 @@ QUERY_MOVIES_WITH_AVAILABLE_SEATS = '''SELECT id, name, rating
                                        '''
 
 QUERY_GET_PROJECTIONS_BY_ID = \
-    '''SELECT Projections.id, Movies.name, date, time, (100 - COUNT(Reservations.projection_id)) as places_left
+    '''SELECT Projections.id, Movies.name, date, time, type, (100 - COUNT(Reservations.projection_id)) as places_left
        FROM Movies 
        LEFT JOIN Projections ON Movies.id = Projections.movie_id 
        LEFT JOIN Reservations ON Projections.id = Reservations.projection_id
