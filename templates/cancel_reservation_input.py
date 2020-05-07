@@ -7,7 +7,3 @@ def get_reservation(reservation_ids):
         command = input('Choose a reservation id to cancel or type back to go back: ')
     reservation_id = int(command)
     return reservation_id
-
-
-def display_cancel_reservation():
-    print("You have successfully cancelled the reservation")

@@ -1,24 +1,17 @@
 import sqlite3
 from utils.constants.queries_create_database import QUERY_MOVIE_INIT, QUERY_PROJECTIONS_INIT, QUERY_USERS_INIT, \
-    QUERY_RESERVATIONS_INIT, QUERY_USERS_FILL
+    QUERY_RESERVATIONS_INIT
+from utils.database_communication import DataBaseCommunication
 
 
-def main():
+def create_initial_database():
     queries = [
         QUERY_MOVIE_INIT,
         QUERY_PROJECTIONS_INIT,
         QUERY_USERS_INIT,
         QUERY_RESERVATIONS_INIT,
-        QUERY_USERS_FILL
     ]
 
     connection = sqlite3.connect('database.db')
-    cursor = connection.cursor()
     for query in queries:
-        cursor.execute(query)
-    connection.commit()
-    connection.close()
-
-
-if __name__ == '__main__':
-    main()
+        DataBaseCommunication.update_database(connection, query)
