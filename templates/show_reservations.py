@@ -1,7 +1,7 @@
 def display_reservations(reservations):
     print('\nYour current reservations are:\n')
     for reservation in reservations:
+        reservation_id, name, date, time, projection_type, row, col = reservation
         print(
-            f'{reservation[0]}. {reservation[1]} on date {reservation[2]} at {reservation[3]}'
-            f' seat: {reservation[4]}, {reservation[5]}')
-    pass
+            f'[{reservation_id}] {name} on date {date} at {time} ({projection_type})'
+            f' seat: {row} {col}')

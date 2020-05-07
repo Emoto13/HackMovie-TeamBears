@@ -108,4 +108,4 @@ def finalize(user_name, projection_id, seats):
 
 
 def cancel():
-    display_cancel_reservation()
+    display_cancel()

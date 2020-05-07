@@ -36,5 +36,5 @@ def display_successful_reservation():
     print("Reservation is successful. Thanks.")
 
 
-def display_cancel_reservation():
-    print("You have cancelled the reservation!")
+def display_cancel():
+    print("You have cancelled the reservation of tickets!")
