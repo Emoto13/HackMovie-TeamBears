@@ -1,17 +1,20 @@
 import hashlib
-from templates.log_in import get_login_info
+from templates.log_in import get_login_info, display_successful_login
+from gateway.log_in import get_log_in_info
 from utils.decorators.decorators_log_in import already_logged_in
-from gateway.check_log_in_info import check_log_in_info_gateway
+from verification.log_in import verify_user_exists
 
 
 @already_logged_in
 def log_in(factory):
-    name, password = get_login_info()
-    hashed_password = hash_password(password, name)
-    check_log_in_info_gateway([name, hashed_password])
-    print('You logged in successfully!')
-    factory.user_name = name
-    factory.is_logged_in = True
+    user_name, password = get_login_info()
+    hashed_password = hash_password(password, user_name)
+
+    user_info = get_log_in_info(user_name, hashed_password)
+    verify_user_exists(user_info)
+    display_successful_login()
+
+    factory.set_logged_user(user_name)
 
 
 def hash_password(password, salt):
