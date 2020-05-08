@@ -1,14 +1,16 @@
-from commands.show_movies_command import show_movies_command
-from commands.show_movie_projections_by_id_and_date_command import show_movie_projections_by_id_and_date
-from commands.make_reservation_command import make_reservation
-from commands.log_in_command import log_in
-from commands.sign_up_command import sign_up
-from commands.show_reservations import show_reservations
-from commands.cancel_reservation import cancel_reservation
-from commands.help_command import get_help_menu
 from functools import partial
 
 from verification.factory import verify_command
+
+from commands.show_movies_command import show_movies_command
+from commands.show_movie_projections_by_id_and_date_command import show_movie_projections_by_id_and_date
+from commands.make_reservation_command import make_reservation
+from commands.show_reservations import show_reservations
+from commands.cancel_reservation import cancel_reservation
+from commands.log_in_command import log_in
+from commands.sign_up_command import sign_up
+from commands.exit_command import exit
+from commands.help_command import get_help_menu
 
 
 class ClientCommandFactory:
@@ -26,7 +28,7 @@ class ClientCommandFactory:
             'cancel_reservation': partial(cancel_reservation, self.user_name),
             'log_in': partial(log_in, self),
             'sign_up': sign_up,
-            'exit': '',
+            'exit': exit,
             'help': get_help_menu
         }
 
