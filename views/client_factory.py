@@ -9,7 +9,7 @@ from commands.show_reservations import show_reservations
 from commands.cancel_reservation import cancel_reservation
 from commands.log_in_command import log_in
 from commands.sign_up_command import sign_up
-from commands.exit_command import exit
+from commands.exit_command import exit_command
 from commands.help_command import get_help_menu
 
 
@@ -28,7 +28,7 @@ class ClientCommandFactory:
             'cancel_reservation': partial(cancel_reservation, self.user_name),
             'log_in': partial(log_in, self),
             'sign_up': sign_up,
-            'exit': exit,
+            'exit': exit_command,
             'help': get_help_menu
         }
 
