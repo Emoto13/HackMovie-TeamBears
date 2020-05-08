@@ -1,22 +1,21 @@
 from gateway.sign_up import check_user_name_already_exists
-from views.templates.sign_up import sign_up_name, sign_up_password
 import string
 
+# TODO Rename to predicates
 
-def verify_user_name_uniqueness():
-    while True:
-        user_name = sign_up_name()
-        names = check_user_name_already_exists(user_name)
-        if len(names) == 0:
-            return user_name
+
+def verify_user_name_uniqueness(user_name):
+    names = check_user_name_already_exists(user_name)
+    if len(names) != 0:
         print('User_name is taken!')
+        return False
+    return True
 
 
-def verify_password():
-    while True:
-        password, verification_password = sign_up_password()
-        if verify_password_params(password, verification_password):
-            return password
+def verify_password(password, verification_password):
+    if verify_password_params(password, verification_password):
+        return True
+    return False
 
 
 def verify_password_params(password, verification_password):
