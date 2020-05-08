@@ -12,6 +12,7 @@ def main():
     command = None
     while not is_command_exit(command):
         clear_screen()
+        print("You can always type 'help' to display additional information\n")
         command = input("Enter command: ")
         try:
             factory.execute_command(command)
