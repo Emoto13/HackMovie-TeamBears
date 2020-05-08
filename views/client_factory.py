@@ -27,7 +27,7 @@ class ClientCommandFactory:
             'show_reservations': partial(show_reservations, self.user_name),
             'cancel_reservation': partial(cancel_reservation, self.user_name),
             'log_in': partial(log_in, self),
-            'sign_up': sign_up,
+            'sign_up': partial(sign_up, self),
             'exit': exit_command,
             'help': get_help_menu
         }
