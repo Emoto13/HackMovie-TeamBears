@@ -1,6 +1,10 @@
+import sqlite3
+
+
 class DataBaseCommunication:
     @staticmethod
-    def get_data(connection, query, *arguments):
+    def get_data(query, *arguments):
+        connection = sqlite3.connect('database.db')
         args_for_query = [arg for arg in arguments]
         try:
             with connection:
@@ -12,7 +16,8 @@ class DataBaseCommunication:
             print(e)
 
     @staticmethod
-    def update_database(connection, query, *arguments):
+    def update_database(query, *arguments):
+        connection = sqlite3.connect('database.db')
         args_for_query = [arg for arg in arguments]
         try:
             with connection:
