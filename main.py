@@ -1,8 +1,7 @@
-from views.client_factory import ClientCommandFactory
 from utils.create_initial_database import create_initial_database
-from views.templates.introduction import display_introduction
 from utils.global_helpers import is_command_exit, clear_screen
-
+from views.templates.introduction import display_introduction
+from views.client_factory import ClientCommandFactory
 
 def main():
     display_introduction()
