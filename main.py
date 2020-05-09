@@ -1,7 +1,9 @@
 from utils.create_initial_database import create_initial_database
 from utils.global_helpers import is_command_exit, clear_screen
+from views.templates.get_command import get_command
 from views.templates.introduction import display_introduction
 from views.client_factory import ClientCommandFactory
+
 
 def main():
     display_introduction()
@@ -11,8 +13,7 @@ def main():
     command = None
     while not is_command_exit(command):
         clear_screen()
-        print("You can always type 'help' to display additional information\n")
-        command = input("Enter command: ")
+        command = get_command()
         try:
             factory.execute_command(command)
         except Exception as e:
