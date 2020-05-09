@@ -32,7 +32,7 @@ class ClientCommandFactory:
             'help': get_help_menu
         }
 
-        return self.handle_command(command_with_arguments, commands)
+        return self.handle_command(command_with_arguments.strip(), commands)
 
     def handle_command(self, command_with_arguments, commands):
         command_with_arguments = command_with_arguments.split(" ")
