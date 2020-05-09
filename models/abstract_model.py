@@ -1,10 +1,8 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 
 
 class AbstractModel(ABC):
-    def __init__(self):
-        pass
-
     @classmethod
+    @abstractmethod
     def create_model(cls, props):
         pass
