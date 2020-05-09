@@ -1,7 +1,10 @@
+from getpass import getpass
+
+
 def get_login_info():
     print('Login to cinema')
     user_name = input('Enter user_name: ')
-    password = input('Enter password: ')
+    password = getpass('Enter password: ')
     return user_name, password
 
 
