@@ -12,4 +12,4 @@ def cancel_reservation(user_name):
 
 def get_reservations(user_name):
     all_reservations = get_all_reservations_by_user_name(user_name)
-    return list(map(lambda reservation: reservation['id'], all_reservations))
+    return list(map(lambda reservation: reservation['reservation_id'], all_reservations))

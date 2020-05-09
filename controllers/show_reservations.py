@@ -9,5 +9,5 @@ def show_reservations(user_name):
     display_reservations(reservations)
 
 
-def map_reservations(props):
-    return list(map(lambda reservation: Reservation.create_model(reservation), props))
+def map_reservations(reservations_raw_data):
+    return list(map(lambda props: Reservation.create_model(props), reservations_raw_data))

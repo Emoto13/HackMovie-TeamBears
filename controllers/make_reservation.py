@@ -18,7 +18,7 @@ def make_reservation(user_name):
 
     # Step 1
     tickets_and_movie_ids = choose_tickets_number_and_get_current_movies()
-    tickets, movie_ids = tickets_and_movie_ids['tickets'], tickets_and_movie_ids['ids']
+    tickets, movie_ids = tickets_and_movie_ids['tickets'], tickets_and_movie_ids['movie_ids']
 
     # Step 2
     projection_ids = choose_movie_by_id_and_get_projections(movie_ids)
@@ -40,9 +40,8 @@ def choose_tickets_number_and_get_current_movies():
     movies_raw_data = get_movies_with_available_seats()
     movies = map_movies(movies_raw_data)
     display_movies_with_available_seats(movies)
-
     movie_ids = get_movie_ids(movies)
-    return {'tickets': tickets, 'ids': movie_ids}
+    return {'tickets': tickets, 'movie_ids': movie_ids}
 
 
 def map_movies(movies_raw_data):
@@ -56,8 +55,8 @@ def get_movie_ids(movies):
 def choose_movie_by_id_and_get_projections(movie_ids):
     movie_id = get_movie_id(movie_ids)
     projections_raw_data = get_projections_by_id(movie_id)
-    projections = map_projections(projections_raw_data)
 
+    projections = map_projections(projections_raw_data)
     verify_projections_with_empty_seats_exist(projections)
     display_projections(projections)
 
@@ -98,7 +97,6 @@ def choose_seats_and_display_reservation(tickets, saloon, projection_id):
 
     reservation_props = dict(**dict(projection_info_raw_data), **{'seats': seats, 'projection_id': projection_id})
     reservation = Reservation.create_model(reservation_props)
-
     display_reservation_info(reservation)
     return reservation
 
