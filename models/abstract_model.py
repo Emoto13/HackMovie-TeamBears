@@ -1,8 +1,10 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 
 
 class AbstractModel(ABC):
     @classmethod
-    @abstractmethod
     def create_model(cls, props):
-        pass
+        model = cls()
+        for key in props.keys():
+            model.__dict__[key] = props[key]
+        return model
