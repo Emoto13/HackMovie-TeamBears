@@ -1,29 +1,31 @@
-QUERY_MOVIES_WITH_AVAILABLE_SEATS = '''SELECT id, name, rating
-                                       FROM Movies
-                                       '''
+GET_MOVIES_WITH_AVAILABLE_SEATS = '''SELECT id as movie_id, name as movie_name, rating as movie_rating
+                                     FROM Movies
+                                     '''
 
-QUERY_GET_PROJECTIONS_BY_ID = \
-    '''SELECT Projections.id as id, name, date, time, type, (100 - COUNT(Reservations.projection_id)) as seats_left
+GET_PROJECTIONS_BY_ID = \
+    '''SELECT date, time,
+       Projections.id as projection_id, name as movie_name,  type as projection_type,
+       (100 - COUNT(Reservations.projection_id)) as seats_left
        FROM Movies 
        LEFT JOIN Projections ON Movies.id = Projections.movie_id 
        LEFT JOIN Reservations ON Projections.id = Reservations.projection_id
        WHERE movie_id = ? 
        GROUP BY Projections.id;'''
 
-QUERY_GET_PROJECTION_INFO = '''SELECT name, rating, date, time, type 
-                               FROM Projections
-                               JOIN Movies On Projections.movie_id = Movies.id
-                               WHERE Projections.id = ?'''
+GET_PROJECTION_INFO = '''SELECT name as movie_name, rating as movie_rating,  type as projection_type, date, time
+                         FROM Projections
+                         JOIN Movies On Projections.movie_id = Movies.id
+                         WHERE Projections.id = ?'''
 
-QUERY_GET_TAKEN_SEATS_BY_ROWS_AND_COLUMNS = '''SELECT row, col
+GET_TAKEN_SEATS_BY_ROWS_AND_COLUMNS = '''SELECT row, col
                                                FROM Projections
                                                JOIN Reservations ON Projections.id = Reservations.projection_id
                                                WHERE projection_id = ?
                                                ORDER BY row;'''
 
-QUERY_GET_USER_ID_BY_USERNAME = '''SELECT id
+GET_USER_ID_BY_USERNAME = '''SELECT id
                                     FROM Users 
                                     WHERE username = ?'''
 
-QUERY_INSERT_INTO_RESERVATIONS = '''INSERT INTO Reservations (user_id, projection_id, row, col)
+INSERT_INTO_RESERVATIONS = '''INSERT INTO Reservations (user_id, projection_id, row, col)
                                     VALUES (?, ?, ?, ?)'''

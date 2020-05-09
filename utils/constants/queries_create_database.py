@@ -1,16 +1,16 @@
-QUERY_MOVIE_INIT = '''CREATE TABLE IF NOT EXISTS Movies
+MOVIE_INIT = '''CREATE TABLE IF NOT EXISTS Movies
     (id integer primary key AUTOINCREMENT unique not NULL,
     name varchar(100) not NULL,
     rating real not NULL);'''
 
-QUERY_MOVIE_FILL = '''INSERT INTO Movies (name, rating)
+MOVIE_FILL = '''INSERT INTO Movies (name, rating)
                         VALUES
                         ("The Hunger Games: Catching Fire", 7.9),
                         ("Wreck-It Ralph", 7.8),
                         ("Her", 8.3);'''
 
 
-QUERY_PROJECTIONS_INIT = '''CREATE TABLE IF NOT EXISTS Projections
+PROJECTIONS_INIT = '''CREATE TABLE IF NOT EXISTS Projections
     (id integer primary key AUTOINCREMENT unique not NULL,
     movie_id integer not NULL,
     type varchar(5) not NULL,
@@ -18,7 +18,7 @@ QUERY_PROJECTIONS_INIT = '''CREATE TABLE IF NOT EXISTS Projections
     time varchar(10) not NULL,
     FOREIGN KEY (movie_id) REFERENCES Movies(id));'''
 
-QUERY_PROJECTIONS_FILL = '''INSERT INTO Projections (movie_id, type, date, time)
+PROJECTIONS_FILL = '''INSERT INTO Projections (movie_id, type, date, time)
                                 VALUES
                                 (1, "3D", "2020-04-01", "19:10"),
                                 (1, "2D", "2020-04-01", "19:00"),
@@ -27,19 +27,19 @@ QUERY_PROJECTIONS_FILL = '''INSERT INTO Projections (movie_id, type, date, time)
                                 (2, "3D", "2020-04-02", "22:00"),
                                 (2, "2D", "2020-04-02", "19:30");'''
 
-QUERY_USERS_INIT = '''CREATE TABLE IF NOT EXISTS Users
+USERS_INIT = '''CREATE TABLE IF NOT EXISTS Users
     (id integer primary key AUTOINCREMENT unique not NULL,
     username varchar(30) not NULL,
     password varchar(50) not NULL);'''
 
-QUERY_USERS_FILL = '''INSERT INTO Users (username, password)
+USERS_FILL = '''INSERT INTO Users (username, password)
                         VALUES
                         ("Martin Angelov", "****"),
                         ("Ivo Donchev", "****"),
                         ("Radoslav Georgiev", "****"),
                         ("Rositza Zlateva", "****");'''
 
-QUERY_RESERVATIONS_INIT = '''CREATE TABLE IF NOT EXISTS Reservations
+RESERVATIONS_INIT = '''CREATE TABLE IF NOT EXISTS Reservations
     (id integer primary key AUTOINCREMENT unique not NULL,
     user_id integer not NULL,
     projection_id integer not NULL,
@@ -48,7 +48,7 @@ QUERY_RESERVATIONS_INIT = '''CREATE TABLE IF NOT EXISTS Reservations
     FOREIGN KEY (user_id) REFERENCES Users(id),
     FOREIGN KEY (projection_id) REFERENCES Projections(id));'''
 
-QUERY_RESERVATIONS_FILL = '''INSERT INTO Reservations (user_id, projection_id, row, col)
+RESERVATIONS_FILL = '''INSERT INTO Reservations (user_id, projection_id, row, col)
                         VALUES
                         (3, 1, 2, 1),
                         (3, 1, 3, 5),
