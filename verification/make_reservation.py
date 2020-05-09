@@ -24,7 +24,7 @@ def is_movie_id_valid(movie_id, movie_ids):
 
 
 def verify_projections_with_empty_seats_exist(projections):
-    if len(projections) == 0:
+    if not projections:
         raise ValueError("Sorry no projections with empty seats found. :'( ")
 
 

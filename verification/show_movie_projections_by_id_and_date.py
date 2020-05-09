@@ -1,3 +1,3 @@
 def verify_projections(projections):
-    if len(projections) == 0:
+    if not projections:
         raise ValueError('No projections for this movie')
