@@ -5,6 +5,8 @@ class AbstractModel(ABC):
     @classmethod
     def create_model(cls, props):
         model = cls()
-        for key in props.keys():
-            model.__dict__[key] = props[key]
+        model.__dict__ = {key: value for key, value in dict(props).items()}
         return model
+
+#        for key in props.keys():
+#            model.__dict__[key] = props[key]
