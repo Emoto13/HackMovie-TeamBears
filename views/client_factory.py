@@ -2,15 +2,15 @@ from functools import partial
 
 from verification.factory import verify_command
 
-from commands.show_movies_command import show_movies_command
-from commands.show_movie_projections_by_id_and_date_command import show_movie_projections_by_id_and_date
-from commands.make_reservation_command import make_reservation
-from commands.show_reservations import show_reservations
-from commands.cancel_reservation import cancel_reservation
-from commands.log_in_command import log_in
-from commands.sign_up_command import sign_up
-from commands.exit_command import exit_command
-from commands.help_command import get_help_menu
+from controllers.show_movies import show_movies_command
+from controllers.show_movie_projections_by_id_and_date import show_movie_projections_by_id_and_date
+from controllers.make_reservation import make_reservation
+from controllers.show_reservations import show_reservations
+from controllers.cancel_reservation import cancel_reservation
+from controllers.log_in import log_in
+from controllers.sign_up import sign_up
+from controllers.exit import exit_command
+from controllers.help import get_help_menu
 
 
 class ClientCommandFactory:
@@ -38,9 +38,7 @@ class ClientCommandFactory:
         command_with_arguments = command_with_arguments.split(" ")
         command = command_with_arguments.pop(0)
         arguments = command_with_arguments
-
         verify_command(command, commands, self.is_logged_in)
-
         command_to_execute = commands[command]
         return self.command_executor(command_to_execute, arguments)
 
