@@ -1,4 +1,6 @@
 def display_reservations(reservations):
-    print('\nYour current reservations are:\n')
+    print('Your current reservations are:')
     for reservation in reservations:
-        print(reservation)
+        print(f'[{reservation.reservation_id}] {reservation.movie_name} on date {reservation.date} '
+              f'at {reservation.time} ({reservation.projection_type})')
+        print(f'Seat: {reservation.row} {reservation.col}')
