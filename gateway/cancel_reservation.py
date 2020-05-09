@@ -7,5 +7,5 @@ def remove_reservation(reservation_id):
 
 
 def get_all_reservations_by_user_name(user_name):
-    reservations = DataBaseCommunication.get_data(GET_ALL_RESERVATIONS_BY_USER_NAME, user_name)
+    reservations = DataBaseCommunication.get_entries(GET_ALL_RESERVATIONS_BY_USER_NAME, user_name)
     return reservations

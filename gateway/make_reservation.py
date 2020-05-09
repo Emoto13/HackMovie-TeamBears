@@ -6,28 +6,28 @@ from utils.database_communication import DataBaseCommunication
 
 # TODO connection into DBCommunication
 def get_movies_with_available_seats():
-    movies = DataBaseCommunication.get_data(QUERY_MOVIES_WITH_AVAILABLE_SEATS)
+    movies = DataBaseCommunication.get_entries(QUERY_MOVIES_WITH_AVAILABLE_SEATS)
     return movies
 
 
 def get_projections_by_id(movie_id):
-    movies = DataBaseCommunication.get_data(QUERY_GET_PROJECTIONS_BY_ID, movie_id)
+    movies = DataBaseCommunication.get_entries(QUERY_GET_PROJECTIONS_BY_ID, movie_id)
     return movies
 
 
 def get_projection_info(projection_id):
-    projection_info = DataBaseCommunication.get_data(QUERY_GET_PROJECTION_INFO, projection_id)
+    projection_info = DataBaseCommunication.get_entries(QUERY_GET_PROJECTION_INFO, projection_id)
     return projection_info
 
 
 def get_taken_seats_rows_and_columns(projection_id):
-    rows_and_columns = DataBaseCommunication.get_data(QUERY_GET_TAKEN_SEATS_BY_ROWS_AND_COLUMNS,
-                                                      projection_id)
+    rows_and_columns = DataBaseCommunication.get_entries(QUERY_GET_TAKEN_SEATS_BY_ROWS_AND_COLUMNS,
+                                                         projection_id)
     return rows_and_columns
 
 
 def get_user_id_by_name(user_name):
-    user_id = int(DataBaseCommunication.get_data(QUERY_GET_USER_ID_BY_USERNAME, user_name)[0][0])
+    user_id = int(DataBaseCommunication.get_entries(QUERY_GET_USER_ID_BY_USERNAME, user_name)[0][0])
     return user_id
 
 
