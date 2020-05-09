@@ -1,9 +1,9 @@
-from utils.constants.queries_sign_up import USER_NAME_UNIQUENESS, ADD_USER_TO_DATABASE
+from utils.constants.queries_sign_up import USERS_WITH_THE_SAME_USER_NAME, ADD_USER_TO_DATABASE
 from utils.database_communication import DataBaseCommunication
 
 
 def check_user_name_already_exists(user_name):
-    names = DataBaseCommunication.get_entries(USER_NAME_UNIQUENESS, user_name)
+    names = DataBaseCommunication.get_entries(USERS_WITH_THE_SAME_USER_NAME, user_name)
     return names
 
 
