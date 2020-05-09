@@ -4,6 +4,7 @@ from views.templates.sign_up import sign_up_name, sign_up_password
 from utils.decorators.log_in_decorators import already_logged_in
 
 
+# TODO refactor
 @already_logged_in
 def sign_up(factory):
     user_name = sign_up_name()
