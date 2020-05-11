@@ -15,7 +15,3 @@ class Reservation(AbstractModel):
         self.time = time
 
         self.movie_name = movie_name
-
-    @classmethod
-    def create_model(cls, props):
-        return super().create_model(props)

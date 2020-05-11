@@ -12,7 +12,3 @@ class Projection(AbstractModel):
 
         self.movie_name = movie_name
         self.movie_rating = movie_rating
-
-    @classmethod
-    def create_model(cls, props):
-        return super().create_model(props)
