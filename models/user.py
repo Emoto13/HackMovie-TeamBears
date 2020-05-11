@@ -8,4 +8,4 @@ class User(AbstractModel):
 
     @classmethod
     def create_model(cls, props):
-        return cls(props[''])
+        return super().create_model(props)
