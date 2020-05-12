@@ -1,6 +1,6 @@
 from gateway.show_reservations import get_reservations
 from views.templates.show_reservations import display_reservations
-from models.reservation import Reservation
+from models.view_models.reservation import Reservation
 
 
 def show_reservations(user_name):

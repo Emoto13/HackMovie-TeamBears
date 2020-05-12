@@ -1,9 +1,9 @@
 import re
 from functools import partial
 
-from models.movie import Movie
-from models.projection import Projection
-from models.reservation import Reservation
+from models.data_models.movie import Movie
+from models.data_models.projection import Projection
+from models.data_models.reservation import Reservation
 from views.templates.make_reservation_input import get_ticket_number, get_movie_id, get_projection_id, get_seat_number, \
     get_action
 from utils.constants.saloon import SALOON

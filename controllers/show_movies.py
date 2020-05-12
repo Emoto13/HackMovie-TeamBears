@@ -1,5 +1,5 @@
 from gateway.show_movies import get_movies
-from models.movie import Movie
+from models.data_models.movie import Movie
 from views.templates.show_movies import display_movies
 
 
