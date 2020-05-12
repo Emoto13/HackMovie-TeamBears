@@ -29,7 +29,7 @@ def get_user_id_by_name(user_name):
     return user_id
 
 
-def create_new_reservation_in_the_database(user_id, reservation):
-    for seat in reservation.seats:
-        row, col = seat[0], seat[1]
-        DataBaseCommunication.update_database(INSERT_INTO_RESERVATIONS, user_id, reservation.projection_id, row, col)
+def create_new_reservation_in_the_database(user_id, reservation_list):
+    for reservation in reservation_list:
+        DataBaseCommunication.update_database(INSERT_INTO_RESERVATIONS, user_id, reservation.projection_id,
+                                              reservation.row, reservation.col)
