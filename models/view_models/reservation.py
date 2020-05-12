@@ -1,7 +1,7 @@
 from models.abstract_model import AbstractModel
 
 
-class Reservation(AbstractModel):
+class ReservationViewModel(AbstractModel):
     def __init__(self, reservation_id=None, movie_name=None, date=None, time=None, projection_type=None,
                  row=None, col=None, seats=None, projection_id=None, movie_rating=None, movie_id=None):
         self.reservation_id = reservation_id
