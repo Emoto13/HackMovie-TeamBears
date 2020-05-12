@@ -1,8 +1,9 @@
 import re
 from functools import partial
 
-from models.data_models.movie import Movie
-from models.data_models.projection import Projection
+from models.view_models.movie import MovieViewModel
+from models.view_models.projection import ProjectionViewModel
+from models.view_models.reservation import ReservationViewModel
 from models.data_models.reservation import Reservation
 from views.templates.make_reservation_input import get_ticket_number, get_movie_id, get_projection_id, get_seat_number, \
     get_action
@@ -28,10 +29,11 @@ def make_reservation(user_name):
     saloon, projection_id = saloon_and_projection_id['saloon'], saloon_and_projection_id['projection_id']
 
     # Step 4
-    reservation = choose_seats_and_display_reservation(tickets, saloon, projection_id)
+    reservation_list = choose_seats_and_display_reservation(tickets, saloon, projection_id)
 
+    print(reservation_list)
     # Step 5
-    finish_reservation(user_name, reservation)
+    finish_reservation(user_name, reservation_list)
 
 
 def choose_tickets_number_and_get_current_movies():
@@ -45,7 +47,7 @@ def choose_tickets_number_and_get_current_movies():
 
 
 def map_movies(movies_raw_data):
-    return list(map(lambda props: Movie.create_model(props), movies_raw_data))
+    return list(map(lambda props: MovieViewModel.create_model(props), movies_raw_data))
 
 
 def get_movie_ids(movies):
@@ -65,7 +67,7 @@ def choose_movie_by_id_and_get_projections(movie_ids):
 
 
 def map_projections(projections_raw_data):
-    return list(map(lambda props: Projection.create_model(props), projections_raw_data))
+    return list(map(lambda props: ProjectionViewModel.create_model(props), projections_raw_data))
 
 
 def get_projection_ids(projections):
@@ -94,11 +96,24 @@ def generate_saloon(taken_seats_rows_and_columns):
 def choose_seats_and_display_reservation(tickets, saloon, projection_id):
     seats = choose_seats(tickets, saloon)
     projection_info_raw_data = get_projection_info(projection_id)
-
     reservation_props = dict(**dict(projection_info_raw_data), **{'seats': seats, 'projection_id': projection_id})
-    reservation = Reservation.create_model(reservation_props)
-    display_reservation_info(reservation)
-    return reservation
+
+    reservation_view_model = ReservationViewModel.create_model(reservation_props)
+    display_reservation_info(reservation_view_model)
+
+    reservation_list = map_reservations(reservation_props, seats)
+    return reservation_list
+
+
+def map_reservations(reservation_props, seats):
+    mapping_func = partial(mapping_reservation_function, reservation_props)
+    return list(map(lambda seat: mapping_func(seat), seats))
+
+
+def mapping_reservation_function(reservation_props, seat):
+    reservation_props['row'] = seat[0]
+    reservation_props['col'] = seat[1]
+    return Reservation.create_model(reservation_props)
 
 
 def choose_seats(tickets, saloon):
@@ -117,17 +132,17 @@ def get_row_and_col(seat):
     return row, col
 
 
-def finish_reservation(user_name, reservation):
-    actions = {'finalize': partial(finalize, user_name, reservation),
+def finish_reservation(user_name, reservation_list):
+    actions = {'finalize': partial(finalize, user_name, reservation_list),
                'cancel': cancel}
     action = get_action(actions)
 
     return actions[action]()
 
 
-def finalize(user_name, reservation):
+def finalize(user_name, reservation_list):
     user_id = get_user_id_by_name(user_name)['id']
-    create_new_reservation_in_the_database(user_id, reservation)
+    create_new_reservation_in_the_database(user_id, reservation_list)
     display_successful_reservation()
 
 
