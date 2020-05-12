@@ -1,5 +1,6 @@
 from functools import partial
 
+from models.data_models.user import User
 from verification.factory import verify_command
 
 from controllers.show_movies import show_movies_command
@@ -14,18 +15,18 @@ from controllers.help import get_help_menu
 
 
 class ClientCommandFactory:
-    def __init__(self, user_name='Guest', is_logged_in=False):
-        self.user_name = user_name
-        self.is_logged_in = is_logged_in
+    def __init__(self):
+        self.user = None
+        self.is_logged_in = False
 
     def execute_command(self, command_with_arguments):
         # partial is used for functions which take global params as args
         commands = {
             'show_movies': show_movies_command,
             'show_movie_projections': show_movie_projections_by_id_and_date,
-            'make_reservation': partial(make_reservation, self.user_name),
-            'show_reservations': partial(show_reservations, self.user_name),
-            'cancel_reservation': partial(cancel_reservation, self.user_name),
+            'make_reservation': partial(make_reservation, self.user.user_name),
+            'show_reservations': partial(show_reservations, self.user.user_name),
+            'cancel_reservation': partial(cancel_reservation, self.user.user_name),
             'log_in': partial(log_in, self),
             'sign_up': partial(sign_up, self),
             'exit': exit_command,
@@ -40,13 +41,13 @@ class ClientCommandFactory:
         arguments = command_with_arguments
         verify_command(command, commands, self.is_logged_in)
         command_to_execute = commands[command]
-        return self.command_executor(command_to_execute, arguments)
+        return self.execute_command_with_its_arguments(command_to_execute, arguments)
 
-    def command_executor(self, command_to_execute, arguments):
+    def execute_command_with_its_arguments(self, command_to_execute, arguments):
         if len(arguments) > 0:
             return command_to_execute(*arguments)
         return command_to_execute()
 
     def set_logged_user(self, user_name):
-        self.user_name = user_name
+        self.user = User(user_name)
         self.is_logged_in = True
