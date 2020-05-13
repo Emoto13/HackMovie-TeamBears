@@ -1,6 +1,6 @@
 from functools import partial
 
-from models.data_models.user import User
+from models.view_models.user import UserViewModel
 from verification.factory import verify_command
 
 from controllers.show_movies import show_movies_command
@@ -49,5 +49,5 @@ class ClientCommandFactory:
         return command_to_execute()
 
     def set_logged_user(self, user_name):
-        self.user = User(user_name)
+        self.user = UserViewModel(user_name)
         self.is_logged_in = True
