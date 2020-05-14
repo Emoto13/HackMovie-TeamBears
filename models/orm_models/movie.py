@@ -1,6 +1,9 @@
 from sqlalchemy import Column, Integer, String, Float
 from sqlalchemy.orm import relationship
 from models.orm_models.base import Base
+from models.orm_models.projection import Projection
+from models.orm_models.reservation import Reservation
+from models.orm_models.user import User
 
 
 class Movie(Base):
