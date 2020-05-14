@@ -9,11 +9,18 @@ def display_movies_with_available_seats(movies):
 
 
 def display_projections(projections):
-    movie_name = projections[0].movie_name
+    movie_name = projections[0].movie.movie_name
     print(f"Projections for movie '{movie_name}': ")
     for projection in projections:
-        print(f"[{projection.projection_id}] - {projection.date} {projection.time} ({projection.projection_type}) "
-              f"{str(projection.seats_left)} seats left")
+        print(
+            f"[{projection.projection_id}] - {projection.projection_date} {projection.projection_time} ({projection.projection_type}) "
+            f"{get_seats_left(projection)} seats left")
+
+
+def get_seats_left(projection):
+    total_seats = 100
+    taken_seats = len(projection.reservations)
+    return total_seats - taken_seats
 
 
 def display_saloon_with_taken_seats(saloon):
@@ -21,11 +28,12 @@ def display_saloon_with_taken_seats(saloon):
         print("".join(row))
 
 
-def display_reservation_info(reservation):
-    display_seats = [str(seat) for seat in reservation.seats]
+def display_reservation_info(projection_info, seats):
+    display_seats = [str(seat) for seat in seats]
+
     print('This is your reservation: ')
-    print(f"Movie: {reservation.movie_name}")
-    print(f"Date and time: {reservation.date} {reservation.time} ({reservation.projection_type})")
+    print(f"Movie: {projection_info.movie.movie_name}")
+    print(f"Date and time: {projection_info.projection_date} {projection_info.projection_time} ({projection_info.projection_type})")
     print(f"Seats: {' '.join(display_seats)}")
 
 
