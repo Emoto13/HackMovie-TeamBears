@@ -5,6 +5,7 @@ from utils.decorators.log_in_decorators import already_logged_in
 from verification.log_in import verify_user_exists
 
 
+# TODO return user object
 @already_logged_in
 def log_in(factory):
     user_name, password = get_login_info()

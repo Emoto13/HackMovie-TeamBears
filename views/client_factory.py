@@ -16,7 +16,7 @@ from controllers.help import get_help_menu
 
 class ClientCommandFactory:
     def __init__(self):
-        self.user = None
+        self.user = UserViewModel('guest')
         self.is_logged_in = False
 
     def execute_command(self, command_with_arguments):
