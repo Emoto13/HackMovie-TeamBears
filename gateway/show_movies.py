@@ -1,7 +1,8 @@
-from utils.constants.queries_show_movies import GET_MOVIES
-from utils.database_communication import DataBaseCommunication
+from utils.session_context_manager import session_scope
+from models.orm_models.movie import Movie
 
 
 def get_movies():
-    movies = DataBaseCommunication.get_entries(GET_MOVIES)
+    with session_scope() as session:
+        movies = session.query(Movie).all()
     return movies
