@@ -33,7 +33,8 @@ def display_reservation_info(projection_info, seats):
 
     print('This is your reservation: ')
     print(f"Movie: {projection_info.movie.movie_name}")
-    print(f"Date and time: {projection_info.projection_date} {projection_info.projection_time} ({projection_info.projection_type})")
+    print(
+        f"Date and time: {projection_info.projection_date} {projection_info.projection_time} ({projection_info.projection_type})")
     print(f"Seats: {' '.join(display_seats)}")
 
 
@@ -71,3 +72,7 @@ def display_seat_is_taken():
 
 def display_no_such_action():
     print("No such command/action.")
+
+
+def display_invalid_tickets():
+    print("Invalid number of tickets. Try again.")
