@@ -1,5 +1,5 @@
 import unittest
-from verification.sign_up import verify_user_name_uniqueness, verify_password_params
+from verification.sign_up import is_user_name_unique, is_password_secure
 
 
 class TestSignUp(unittest.TestCase):
@@ -7,7 +7,7 @@ class TestSignUp(unittest.TestCase):
         user_name = 'Martin Angelov'
         expected = False
 
-        result = verify_user_name_uniqueness(user_name)
+        result = is_user_name_unique(user_name)
 
         self.assertEqual(result, expected)
 
@@ -15,7 +15,7 @@ class TestSignUp(unittest.TestCase):
         user_name = 'Baba Yaga'
         expected = True
 
-        result = verify_user_name_uniqueness(user_name)
+        result = is_user_name_unique(user_name)
 
         self.assertEqual(result, expected)
 
@@ -24,7 +24,7 @@ class TestSignUp(unittest.TestCase):
         verification_password = 'asd'
         expected = False
 
-        result = verify_password_params(password, verification_password)
+        result = is_password_secure(password, verification_password)
 
         self.assertEqual(result, expected)
 
@@ -33,7 +33,7 @@ class TestSignUp(unittest.TestCase):
         verification_password = 'asdfasdf2'
         expected = False
 
-        result = verify_password_params(password, verification_password)
+        result = is_password_secure(password, verification_password)
 
         self.assertEqual(result, expected)
 
@@ -42,7 +42,7 @@ class TestSignUp(unittest.TestCase):
         verification_password = 'afgffsdfd!'
         expected = False
 
-        result = verify_password_params(password, verification_password)
+        result = is_password_secure(password, verification_password)
 
         self.assertEqual(result, expected)
 
@@ -51,7 +51,7 @@ class TestSignUp(unittest.TestCase):
         verification_password = 'Afgffsdfddsa'
         expected = False
 
-        result = verify_password_params(password, verification_password)
+        result = is_password_secure(password, verification_password)
 
         self.assertEqual(result, expected)
 
@@ -60,7 +60,7 @@ class TestSignUp(unittest.TestCase):
         verification_password = 'Afgffsdfddsa!'
         expected = True
 
-        result = verify_password_params(password, verification_password)
+        result = is_password_secure(password, verification_password)
 
         self.assertEqual(result, expected)
 

@@ -5,7 +5,7 @@ import string
 
 
 # TODO Rename to predicates
-def verify_user_name_uniqueness(user_name):
+def is_user_name_unique(user_name):
     user_names_found = check_user_name_already_exists(user_name)
     if user_names_found:
         display_user_name_is_taken()
@@ -13,13 +13,13 @@ def verify_user_name_uniqueness(user_name):
     return True
 
 
-def verify_password(password, verification_password):
-    if verify_password_params(password, verification_password):
+def are_passwords_matching(password, verification_password):
+    if is_password_secure(password, verification_password):
         return True
     return False
 
 
-def verify_password_params(password, verification_password):
+def is_password_secure(password, verification_password):
     special_char = set(string.punctuation)
     if password != verification_password:
         display_incorrect_verification_password()
