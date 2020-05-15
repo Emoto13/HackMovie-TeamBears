@@ -1,5 +1,6 @@
 from functools import partial
 
+from models.orm_models.user import User
 from models.view_models.user import UserViewModel
 from verification.factory import verify_command
 
@@ -16,7 +17,7 @@ from controllers.help import get_help_menu
 
 class ClientCommandFactory:
     def __init__(self):
-        self.user = UserViewModel('guest')
+        self.user = User()
         self.is_logged_in = False
 
     def execute_command(self, command_with_arguments):
@@ -24,9 +25,9 @@ class ClientCommandFactory:
         commands = {
             'show_movies': show_movies_command,
             'show_movie_projections': show_movie_projections_by_id_and_date,
-            'make_reservation': partial(make_reservation, self.user.user_name),
-            'show_reservations': partial(show_reservations, self.user.user_name),
-            'cancel_reservation': partial(cancel_reservation, self.user.user_name),
+            'make_reservation': partial(make_reservation, self.user),
+            'show_reservations': partial(show_reservations, self.user.user_id),
+            'cancel_reservation': partial(cancel_reservation, self.user.user_id),
             'log_in': partial(log_in, self),
             'sign_up': partial(sign_up, self),
             'exit': exit_command,
@@ -48,6 +49,6 @@ class ClientCommandFactory:
             return command_to_execute(*arguments)
         return command_to_execute()
 
-    def set_logged_user(self, user_name):
-        self.user = UserViewModel(user_name)
+    def set_logged_user(self, user):
+        self.user = user
         self.is_logged_in = True
