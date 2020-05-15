@@ -4,7 +4,6 @@ from views.templates.sign_up_display import display_incorrect_verification_passw
 import string
 
 
-# TODO Rename to predicates
 def is_user_name_unique(user_name):
     user_names_found = check_user_name_already_exists(user_name)
     if user_names_found:
