@@ -1,16 +1,15 @@
 import re
 
 
-# TODO prints to display in templates
 # Step 1
 from views.templates.make_reservation_display import display_wrong_movie_id, display_wrong_projection_id, \
     display_seat_already_reserved, display_wrong_seat_input, display_seat_is_not_in_the_saloon, display_seat_is_taken, \
-    display_no_such_action
+    display_no_such_action, display_invalid_tickets
 
 
 def is_ticket_number_valid(tickets):
     if tickets <= 0:
-        print("Invalid number of tickets. Try again.")
+        display_invalid_tickets()
         return False
     return True
 
