@@ -7,7 +7,6 @@ from views.client_factory import ClientCommandFactory
 
 def main():
     display_introduction()
-    create_initial_database()
     factory = ClientCommandFactory()
 
     command = None
