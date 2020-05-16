@@ -1,4 +1,3 @@
-from utils.create_initial_database import create_initial_database
 from utils.global_helpers import is_command_exit, clear_screen
 from views.templates.get_command import get_command
 from views.templates.introduction import display_introduction
