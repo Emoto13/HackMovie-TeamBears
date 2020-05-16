@@ -14,7 +14,7 @@ from controllers.exit import exit_command
 from controllers.help import get_help_menu
 
 
-class ClientCommandFactory:
+class Router:
     def __init__(self):
         self.user = User()
         self.is_logged_in = False

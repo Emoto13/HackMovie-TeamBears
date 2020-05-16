@@ -1,12 +1,14 @@
+from utils.bootstrap import bootstrap
 from utils.global_helpers import is_command_exit, clear_screen
 from views.templates.get_command import get_command
 from views.templates.introduction import display_introduction
-from views.client_factory import ClientCommandFactory
+from router.router import Router
 
 
 def main():
+    bootstrap()
     display_introduction()
-    factory = ClientCommandFactory()
+    factory = Router()
 
     command = None
     while not is_command_exit(command):
