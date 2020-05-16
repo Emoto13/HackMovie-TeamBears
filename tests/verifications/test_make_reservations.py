@@ -3,7 +3,7 @@ from verification.make_reservation import verify_projections_with_empty_seats_ex
     is_movie_id_valid, is_projection_id_valid, verify_seat_input, verify_seat_is_in_saloon,\
     verify_seat_is_available, is_action_valid, seat_is_valid
 
-TEMP_SAOON = [
+TEMP_SALOON = [
     [' ', '  1', '  2', '  3', '  4', '  5', '  6', '  7', '  8', '  9', '  10'],
     ['1', '  .', '  .', '  .', '  .', '  .', '  .', '  .', '  .', '  .', '  .'],
     ['2', '  .', '  .', '  .', '  .', '  .', '  .', '  .', '  .', '  .', '  .'],
@@ -102,7 +102,7 @@ class TestMakeReservation(unittest.TestCase):
     def test_if_verify_seat_is_in_saloon_returns_false_if_seat_is_not_in_saloon(self):
         row = 15
         col = 20
-        saloon = TEMP_SAOON
+        saloon = TEMP_SALOON
         expected = False
 
         result = verify_seat_is_in_saloon(row, col, saloon)
@@ -112,7 +112,7 @@ class TestMakeReservation(unittest.TestCase):
     def test_if_verify_seat_is_in_saloon_returns_true_if_seat_is_in_saloon(self):
         row = 5
         col = 4
-        saloon = TEMP_SAOON
+        saloon = TEMP_SALOON
         expected = True
 
         result = verify_seat_is_in_saloon(row, col, saloon)
@@ -122,7 +122,7 @@ class TestMakeReservation(unittest.TestCase):
     def test_if_verify_seat_is_available_returns_false_if_seat_is_taken(self):
         row = 4
         col = 4
-        saloon = TEMP_SAOON
+        saloon = TEMP_SALOON
         expected = False
 
         result = verify_seat_is_available(row, col, saloon)
@@ -132,7 +132,7 @@ class TestMakeReservation(unittest.TestCase):
     def test_if_verify_seat_is_available_returns_true_if_seat_is_free(self):
         row = 5
         col = 4
-        saloon = TEMP_SAOON
+        saloon = TEMP_SALOON
         expected = True
 
         result = verify_seat_is_available(row, col, saloon)
@@ -159,7 +159,7 @@ class TestMakeReservation(unittest.TestCase):
 
     def test_if_seat_is_valid_returns_false_if_seat_is_already_picked_in_current_session(self):
         seat = '5,4'
-        saloon = TEMP_SAOON
+        saloon = TEMP_SALOON
         seats = [(5, 4)]
         expected = False
 
@@ -169,7 +169,7 @@ class TestMakeReservation(unittest.TestCase):
 
     def test_if_seat_is_valid_returns_true_if_seat_has_not_been_picked_in_current_session(self):
         seat = '5,4'
-        saloon = TEMP_SAOON
+        saloon = TEMP_SALOON
         seats = []
         expected = True
 
