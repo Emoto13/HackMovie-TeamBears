@@ -1,5 +1,5 @@
 from utils.session_context_manager import session_scope
-from models.orm_models.user import User
+from models.user import User
 
 
 def check_user_name_already_exists(user_name):

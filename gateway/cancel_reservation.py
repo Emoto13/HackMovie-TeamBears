@@ -1,4 +1,4 @@
-from models.orm_models.reservation import Reservation
+from models.reservation import Reservation
 from utils.session_context_manager import session_scope
 
 
