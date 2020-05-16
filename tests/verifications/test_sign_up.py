@@ -13,13 +13,13 @@ class TestSignUp(unittest.TestCase):
     #
     #        self.assertEqual(result, expected)
 
-    def test_if_verify_user_name_uniqueness_returns_true_if_username_is_not_taken(self):
-        user_name = 'Baba Yaga'
-        expected = True
+ #  def test_if_verify_user_name_uniqueness_returns_true_if_username_is_not_taken(self):
+ #      user_name = 'Baba Yaga'
+ #      expected = True
 
-        result = is_user_name_unique(user_name)
+ #      result = is_user_name_unique(user_name)
 
-        self.assertEqual(result, expected)
+ #      self.assertEqual(result, expected)
 
     def test_if_verify_password_params_returns_false_if_password_length_is_less_than_8(self):
         password = 'asd'
