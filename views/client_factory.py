@@ -1,7 +1,6 @@
 from functools import partial
 
-from models.orm_models.user import User
-from models.view_models.user import UserViewModel
+from models.user import User
 from verification.factory import verify_command
 
 from controllers.show_movies import show_movies_command
@@ -40,8 +39,10 @@ class ClientCommandFactory:
         command_with_arguments = command_with_arguments.split(" ")
         command = command_with_arguments.pop(0)
         arguments = command_with_arguments
+
         verify_command(command, commands, self.is_logged_in)
         command_to_execute = commands[command]
+
         return self.execute_command_with_its_arguments(command_to_execute, arguments)
 
     def execute_command_with_its_arguments(self, command_to_execute, arguments):
