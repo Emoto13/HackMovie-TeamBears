@@ -34,14 +34,14 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Run main
       run: python3 main.py
-        inputs:
-          enter:
-            description: 'Press enter'
-            required: true
-            default: ''
-          exit:
-            description: 'Press exit'
-            required: true
-            default: 'exit'
+      inputs:
+        enter:
+          description: 'Press enter'
+          required: true
+          default: ''
+        exit:
+          description: 'Press exit'
+          required: true
+          default: 'exit'
     - name: Test with pytest
       run: pytest
