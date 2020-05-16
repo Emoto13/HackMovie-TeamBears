@@ -1,7 +1,7 @@
 from utils.session_context_manager import session_scope
-from models.orm_models.movie import Movie
-from models.orm_models.projection import Projection
-from models.orm_models.reservation import Reservation
+from models.movie import Movie
+from models.projection import Projection
+from models.reservation import Reservation
 
 
 def get_movies():

@@ -2,7 +2,7 @@ import hashlib
 from gateway.sign_up import add_user_to_database
 from views.templates.sign_up_input import sign_up_name, sign_up_password
 from utils.decorators.log_in_decorators import already_logged_in
-from models.orm_models.user import User
+from models.user import User
 
 
 # TODO refactor

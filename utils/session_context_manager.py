@@ -1,10 +1,10 @@
 from contextlib import contextmanager
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models.orm_models.base import Base
+from models.base import Base
 
 engine = create_engine("sqlite:///cinema.db")
-Session = sessionmaker(bind=engine)
+Session = sessionmaker(bind=engine, expire_on_commit=False)
 Base.metadata.create_all(engine)
 
 
@@ -15,6 +15,8 @@ def session_scope():
     try:
         yield session
         session.commit()
-    except Exception as e:
+    except:
         session.rollback()
-        print(e)
+        raise
+    finally:
+        session.close()

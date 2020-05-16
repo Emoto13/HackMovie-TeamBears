@@ -1,5 +1,5 @@
 from utils.session_context_manager import session_scope
-from models.orm_models.movie import Movie
+from models.movie import Movie
 
 
 def get_movies():

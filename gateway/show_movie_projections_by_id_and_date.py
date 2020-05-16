@@ -1,9 +1,5 @@
-# from utils.database_communication import DataBaseCommunication
-# from utils.constants.queries_show_movie_projections_by_id_and_date import GET_PROJECTIONS_BY_MOVIE_ID,\
-#     GET_PROJECTIONS_BY_MOVIE_ID_AND_DATE
 from utils.session_context_manager import session_scope
-from models.orm_models.projection import Projection
-from models.orm_models.movie import Movie
+from models.projection import Projection
 
 
 def get_movies_by_id_or_date(movie_id, date):
