@@ -1,11 +1,12 @@
+import os
 from contextlib import contextmanager
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models.base import Base
 
-engine = create_engine("sqlite:///cinema.db")
+DATABASE_NAME = os.environ.get('PROJECT_DATABASE_NAME', 'cinema.db')
+
+engine = create_engine(f'sqlite:///{DATABASE_NAME}')
 Session = sessionmaker(bind=engine, expire_on_commit=False)
-Base.metadata.create_all(engine)
 
 
 @contextmanager
