@@ -1,3 +1,3 @@
 #! /bin/bash
 
-PROJECT_DATABASE_NAME="tests.db" py.test
+PROJECT_DATABASE_NAME="tests.db" pytest
