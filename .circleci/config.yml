@@ -12,9 +12,12 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
+          command: chmod +x ./run_tests.sh
+          name: Grant test permission
+      - run:
           command: ./run_tests.sh
           name: Test
-
+          
 workflows:
   main:
     jobs:
