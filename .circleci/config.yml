@@ -11,6 +11,12 @@ jobs:
       - python/load-cache
       - python/install-deps
       - python/save-cache
+      -  run:
+          command: python -m pip install --upgrade pip
+          name: Upgrade pip
+      -  run:
+          command: pip install flake8 pytest
+          name: Install flake and pytest
       - run:
           command: chmod +x ./run_tests.sh
           name: Grant test permission
